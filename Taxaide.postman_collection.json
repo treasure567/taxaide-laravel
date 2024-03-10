@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "196f5cac-1b47-4e2b-9d6e-e7e764a58716",
+		"name": "Taxaide",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16988540"
+	},
+	"item": [
+		{
+			"name": "GET TODO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://taxaide-node.treasureuvietobore.com/api/v1/todo/get",
+					"protocol": "https",
+					"host": [
+						"taxaide-node",
+						"treasureuvietobore",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE TODO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Example Todo\",\n    \"description\": \"Perfect\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://taxaide-node.treasureuvietobore.com/api/v1/todo/create",
+					"protocol": "https",
+					"host": [
+						"taxaide-node",
+						"treasureuvietobore",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE TODO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"todo_id\": \"65ed8ac74b8072fd6b455b0a\",\n    \"title\": \"Example Todo\",\n    \"completed\": \"no\",\n    \"description\": \"Perfect\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://taxaide-node.treasureuvietobore.com/api/v1/todo/update",
+					"protocol": "https",
+					"host": [
+						"taxaide-node",
+						"treasureuvietobore",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE TODO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"todo_id\": \"65ed8ac74b8072fd6b455b0a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://taxaide-node.treasureuvietobore.com/api/v1/todo/delete",
+					"protocol": "https",
+					"host": [
+						"taxaide-node",
+						"treasureuvietobore",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
