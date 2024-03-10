@@ -21,7 +21,7 @@ class TodoController extends Controller
 
     public function create(Request $request) {
         $validator = Validator::make($request->all(), [
-            'title' => ['required', 'string'],
+            'title' => ['required', 'string', 'min:10'],
             'description' => ['required', 'string']
         ]);
         if ($validator->fails()) {
@@ -32,8 +32,10 @@ class TodoController extends Controller
             $req = $req['resp'];
             $msg = $req->message;
             return redirect()->back()->with(['success_alert' => $msg]);
+        } else {
+            $msg = $req['msg'];
+            return redirect()->back()->with(['danger_alert' => $msg]);
         }
-        return redirect()->back()->with(['danger_alert' => "An error occured while trying to create the Todo, Please try again later"]);
     }
 
     public function update($todo, Request $request) {
