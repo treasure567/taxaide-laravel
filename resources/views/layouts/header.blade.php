@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <title>Falcon</title>
-    <link rel="icon" type="image/png" href="{{ assets('home/img/favicon.png') }}">
+    <title>Taxaide</title>
     <!-- BEGIN: Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
@@ -109,7 +108,6 @@
               $r = route('todo.index');
           @endphp
           <a class="flex items-center" href="{{ $r }}">
-            <img src="{{ assets('home/img/logos.png') }}" class="black_logo" alt="logo">
             {{-- <img src="{{ url('/') }}/assets/images/logo/logo-c.svg" class="black_logo" alt="logo"> --}}
             {{-- <img src="{{ url('/') }}/assets/images/logo/logo-c-white.svg" class="white_logo" alt="logo"> --}}
             {{-- <span class="ltr:ml-3 rtl:mr-3 text-xl font-Inter font-bold text-slate-900 dark:text-white">{{ env('APP_NAME', 'Falcon') }}</span> --}}
@@ -139,7 +137,6 @@
               <div class="flex justify-between items-center h-full">
                 <div class="flex items-center md:space-x-4 space-x-2 xl:space-x-0 rtl:space-x-reverse vertical-box">
                   <a href="{{ route('todo.index') }}" class="mobile-logo xl:hidden inline-block">
-                    <img src="{{ assets('home/img/logos.png') }}" class="black_logo" alt="logo">
                     {{-- <img src="{{ assets('images/logo/logo-c.svg') }}" class="black_logo" alt="logo"> --}}
                     {{-- <img src="{{ url('/') }}/assets/images/logo/logo-c-white.svg" class="white_logo" alt="logo"> --}}
                   </a>
@@ -164,10 +161,7 @@
                         <img src="{{ url('/') }}/assets/images/all-img/user.png" alt="user" class="block w-full h-full object-cover rounded-full">
                       </div>
                       @php
-                        $name = "";
-                        if (current_guard('web')) {
-                          $name = user()->name;
-                        }
+                        $name = user()->name;
                       @endphp
                       <span class="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap">{{ $name }}</span>
                     </span>
