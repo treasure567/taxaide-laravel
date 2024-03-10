@@ -33,6 +33,7 @@ Route::middleware(['auth'])->prefix('todo')->name('todo.')->group(function () {
     Route::get('/', [TodoController::class, 'index'])->name('index');
     Route::post('/create', [TodoController::class, 'create'])->name('create');
     Route::post('/update/{todo}', [TodoController::class, 'update'])->name('update');
+    Route::post('/delete/{todo}', [TodoController::class, 'delete'])->name('delete');
 });
 
 require __DIR__.'/auth.php';
