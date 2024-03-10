@@ -1,0 +1,5 @@
+[
+    {"title": "+200", "start": "2023-10-15", "net_profit": 100},
+    {"title": "-100", "start": "2023-10-20", "net_profit": -50},
+    {"title": "+300", "start": "2023-10-25", "net_profit": 75}
+]
