@@ -20,7 +20,7 @@
           <div class="card">
             <header class=" card-header noborder">
               <h4 class="card-title">TODO</h4>
-              {{-- <button type="button" class="btn btn-primary float-end waves-effect waves-float waves-light" data-bs-toggle="modal" data-bs-target="#addNewNetwork">Add new Network</button> --}}
+              <button type="button" class="btn btn-primary float-end waves-effect waves-float waves-light" id="copyButton" onclick="copyJWT()">COPY JWT</button>
               <button data-bs-toggle="modal" data-bs-target="#form_modal" class="btn inline-flex justify-center btn-dark rounded-[25px]">
                 <span class="flex items-center">
                     <iconify-icon class="text-xl" icon="heroicons-outline:plus"></iconify-icon>
@@ -232,3 +232,12 @@
 </div>
 </div>
 @include('layouts.footer')
+<script>
+    function copyJWT() {
+        navigator.clipboard.writeText("{{ jwt_encode() }}");
+        $('#copyButton').html('Copied !!!');
+        setTimeout(() => {
+        $('#copyButton').html('Copy JWT');
+        }, 1000);
+    }
+</script>
