@@ -41,7 +41,7 @@
                           <th scope="col" class=" table-th "> Title </th>
                           <th scope="col" class=" table-th "> Description </th>
                           <th scope="col" class=" table-th "> Status </th>
-                          {{-- <th scope="col" class=" table-th "> Action </th> --}}
+                          <th scope="col" class=" table-th "> Action </th>
                         </tr>
                       </thead>
                       <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
@@ -57,8 +57,18 @@
                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-{!! status($todo->completed) !!}-500
                                 bg-{!! status($todo->completed) !!}-500">{{ ($todo->completed ? "YES" : "NO") }}</div>
                             </td>
+                            <td class='table-td '>
+                                <div class='flex space-x-3 rtl:space-x-reverse'>
+                                    <button class='edit-button action-btn' type='button' data-bs-toggle="modal" data-bs-target="#edit_modal{{ $todo->_id }}" >
+                                        <iconify-icon icon='heroicons:pencil-square'></iconify-icon>
+                                    </button>
+                                    <button class='delete-button action-btn' type='button' data-bs-toggle="modal" data-bs-target="#delete_modal{{ $todo->_id }}">
+                                        <iconify-icon icon='heroicons:trash'></iconify-icon>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
-                        {{-- <div id="view_modal{{ $ticket->id }}" tabindex="-1" aria-labelledby="view_modal" class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" style="display: none;">
+                        <div id="edit_modal{{ $todo->_id }}" tabindex="-1" aria-labelledby="edit_modal" class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog modal-md relative w-auto pointer-events-none">
                               <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                                 <div class="relative w-full h-full max-w-xl md:h-auto">
@@ -66,7 +76,7 @@
                                     <!-- Modal header -->
                                     <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                                       <h3 class="text-xl font-medium text-white dark:text-white capitalize">
-                                        {{ $ticket->uuid }}
+                                        {{ $todo->title }}
                                       </h3>
                                       <button type="button" class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex
                                             items-center dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">
@@ -79,24 +89,40 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div>
-                                        <div class="p-6 space-y-6">
-                                          <div class="input-group">
-                                              <label for="name" class="text-sm font-Inter font-normal text-slate-900 block">Message</label>
-                                              <textarea name="message" class="text-sm font-Inter font-normal text-slate-600 block w-full py-3 px-4 focus:!outline-none focus:!ring-0 border
-                                                          !border-slate-400 rounded-md mt-2" disabled>{{ $ticket->message }}</textarea>
-                                          </div>
-                                        </div>
-                                        <!-- Modal footer -->
-                                        <div class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                                          <button data-bs-dismiss="modal" type="button" class="btn inline-flex justify-center btn-outline-dark">Close</button>
-                                        </div>
-                                      </form>
+                                        <form action="{{ route('todo.update', ['todo' => $todo->_id]) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="p-6 space-y-6">
+                                                <div class="input-group">
+                                                    <label for="name" class="text-sm font-Inter font-normal text-slate-900 block">Title</label>
+                                                    <input name="title" class="text-sm font-Inter font-normal text-slate-600 block w-full py-3 px-4 focus:!outline-none focus:!ring-0 border
+                                                                !border-slate-400 rounded-md mt-2" placeholder="Quick Todo" required value="{{ $todo->title }}"/>
+                                                </div>
+                                                <div class="input-group">
+                                                    <label for="description" class="text-sm font-Inter font-normal text-slate-900 block">Description</label>
+                                                    <textarea name="description" class="text-sm font-Inter font-normal text-slate-600 block w-full py-3 px-4 focus:!outline-none focus:!ring-0 border
+                                                                !border-slate-400 rounded-md mt-2" placeholder="A beautiful Todo" required>{{ $todo->description }}</textarea>
+                                                </div>
+                                                <div class="input-group">
+                                                    <label for="select2basic" class="text-sm font-Inter font-normal text-slate-900 block">Completed</label>
+                                                    <select name="status" id="status" class="text-sm font-Inter font-normal text-slate-600 block w-full py-3 px-4 focus:!outline-none focus:!ring-0 border
+                                                    !border-slate-400 rounded-md mt-2" required>
+                                                        <option {!! select_dropdown($todo->completed, 'none') !!} disabled="disabled" value="none" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Select Completed</option>
+                                                        <option {!! select_dropdown($todo->completed, true) !!} value="pending" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Yes</option>
+                                                        <option {!! select_dropdown($todo->completed, false) !!} value="responded" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                                            <button data-bs-dismiss="modal" type="button" class="btn inline-flex justify-center btn-outline-dark">Close</button>
+                                            </div>
+                                        </form>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                        </div> --}}
+                        </div>
                         @php
                             $count++;
                         @endphp
