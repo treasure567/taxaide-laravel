@@ -45,15 +45,30 @@ class TodoController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with(['danger_alert' => $validator->errors()->first()]);
         }
-        $data =  $request->only(['title', 'description']);
-        $data['todo_id'] = $todo; 
-        $data['completed'] = ($request->completed == 'yes') ? true : false;
+        $data =  $request->only(['title', 'description', 'completed']);
+        $data['todo_id'] = $todo;
         $req = socket('update', 'POST', $data);
         if ($req['status'] == true) {
             $req = $req['resp'];
             $msg = $req->message;
             return redirect()->back()->with(['success_alert' => $msg]);
+        } else {
+            $msg = $req['msg'];
+            return redirect()->back()->with(['danger_alert' => $msg]);
         }
-        return redirect()->back()->with(['danger_alert' => "An error occured while trying to update the Todo, Please try again later"]);
+    }
+
+    public function delete($todo) {
+        info($todo);
+        $data['todo_id'] = $todo;
+        $req = socket('delete', 'POST', $data);
+        if ($req['status'] == true) {
+            $req = $req['resp'];
+            $msg = $req->message;
+            return redirect()->back()->with(['success_alert' => $msg]);
+        } else {
+            $msg = $req['msg'];
+            return redirect()->back()->with(['danger_alert' => $msg]);
+        }
     }
 }
