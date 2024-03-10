@@ -173,6 +173,7 @@ if (! function_exists('socket')) {
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_close($curl);
             $response = json_decode(curl_exec($curl));
+            // info(json_encode($response));
             if (isset($response->status) && isset($response->message)) {
                 if ($response->status == true) {
                     $data = [
@@ -191,14 +192,16 @@ if (! function_exists('socket')) {
             } else {
                 $data = [
                     'status' => false,
-                    'resp' => []
+                    'resp' => [],
+                    'msg' => 'An error occured while trying to update the Todo, Please try again later'
                 ];
             }
             return $data; 
         } catch (\Exception $e) {
             $data = [
                 'status' => false,
-                'resp' => []
+                'resp' => [],
+                'msg' => 'An error occured while trying to update the Todo, Please try again later'
             ];
             return $data; 
         }
