@@ -40,6 +40,8 @@
                           <th scope="col" class=" table-th "> S/N </th>
                           <th scope="col" class=" table-th "> Title </th>
                           <th scope="col" class=" table-th "> Description </th>
+                          <th scope="col" class=" table-th "> Created At </th>
+                          <th scope="col" class=" table-th "> Updated At </th>
                           <th scope="col" class=" table-th "> Status </th>
                           <th scope="col" class=" table-th "> Action </th>
                         </tr>
@@ -53,6 +55,8 @@
                             <td class="table-td">{{ $count }}</td>
                             <td class="table-td">{{ $todo->title }}</td>
                             <td class="table-td">{{ $todo->description }}</td>
+                            <td class="table-td">{{ \Carbon\Carbon::parse($todo->createdAt)->format('g:iA, Y-m-d') }}</td>
+                            <td class="table-td">{{ \Carbon\Carbon::parse($todo->updatedAt)->format('g:iA, Y-m-d') }}</td>
                             <td class="table-td">
                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-{!! status($todo->completed) !!}-500
                                 bg-{!! status($todo->completed) !!}-500">{{ ($todo->completed ? "YES" : "NO") }}</div>
