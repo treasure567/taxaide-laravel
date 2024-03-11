@@ -208,11 +208,6 @@ if (! function_exists('socket')) {
     }
 }
 
-if (! function_exists('server_token')) {
-    function server_token() {
-        return env('APP_ENV') === 'local' ? "DiscountData_ccae7ae91885e0b4468fb25ac4f11955d8d383fc_X" : 'DiscountData_a105458e3c58b44079f59ad06ab5464a98c6a7e6_X';
-    }
-}
 
 if (! function_exists('apiurl')) {
     function apiurl() {
